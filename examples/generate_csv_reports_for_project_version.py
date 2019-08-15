@@ -53,7 +53,7 @@ version_name_map = {
 class FailedReportDownload(Exception):
 	pass
 
-def download_report(location, filename, retries=4):
+def download_report(location, filename, retries=5):
 	report_id = location.split("/")[-1]
 
 	if retries:
@@ -66,7 +66,7 @@ def download_report(location, filename, retries=4):
 		else:
 			print("Failed to retrieve report {}".format(report_id))
 			print("Probably not ready yet, waiting 5 seconds then retrying...")
-			time.sleep(5)
+			time.sleep(60)
 			retries -= 1
 			download_report(location, filename, retries)
 	else:
